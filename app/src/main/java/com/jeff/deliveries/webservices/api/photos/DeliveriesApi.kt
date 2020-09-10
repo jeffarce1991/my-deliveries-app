@@ -6,11 +6,9 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface PhotosApi {
+interface DeliveriesApi {
 
-    @GET("photos")
-    fun loadPhotos(): Single<Response<List<PhotoDto>>>
+    @GET("v2/deliveries?limit=20&offset=0")
+    fun loadDeliveries(): Single<Response<List<PhotoDto>>>
 
-    @GET("photos/{id}")
-    fun loadPhotoById(@Path("id") id: Int): Single<Response<PhotoDto>>
 }
