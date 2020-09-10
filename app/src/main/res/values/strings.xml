@@ -1,5 +1,5 @@
 <!DOCTYPE resources [
-    <!ENTITY app_name "My Template App">
+    <!ENTITY app_name "My Deliveries App">
     <!ENTITY db_name "mda-database.sql">
     ]>
 <resources>
