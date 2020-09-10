@@ -29,14 +29,46 @@
 
         <TextView
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:id="@+id/customRowTitle"
+            android:id="@+id/from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/screen_margin"
-            android:text="TITLE"
+            android:text="From: "
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toEndOf="@+id/thumbnail"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/screen_margin"
+            android:text="To: "
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/from"/>
+
+        <TextView
+            android:id="@+id/favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_favorite_border_24"
+            android:drawableLeft="@drawable/ic_baseline_favorite_border_24"
+            android:layout_marginEnd="@dimen/screen_margin_large"
+            android:layout_marginRight="@dimen/screen_margin_large"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/screen_margin"
+            android:text="$85 "
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
