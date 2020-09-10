@@ -87,7 +87,7 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
 
-        supportActionBar!!.title = intent.getStringExtra(resources.getString(R.string.delivery_details))
+        supportActionBar!!.title = resources.getString(R.string.delivery_details)
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
@@ -105,7 +105,7 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
 
         binding.root.from.text = from
         binding.root.to.text = to
-        binding.root.to.text = price
+        binding.root.delivery_fee.text = price
     }
 
     override fun showMessage(message: String) {
