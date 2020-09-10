@@ -1,4 +1,4 @@
-package com.jeff.deliveries.supplychain.photo
+package com.jeff.deliveries.supplychain.deliveries
 
 import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.database.usecase.local.loader.PhotoLocalLoader
