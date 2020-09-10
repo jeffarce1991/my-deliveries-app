@@ -6,10 +6,9 @@ import com.jeff.deliveries.database.local.Delivery
 interface MainView : MvpView {
      fun hideProgress()
      fun showProgress()
-     fun showProgressRemote()
-     fun showProgressLocal()
+     fun showMessage(message: String)
 
-     fun showLoadingDataFailed()
-     fun showToast(message: String)
-     fun generateDataList(deliveries: List<Delivery>)
+     fun generateDeliveryList(deliveries: List<Delivery>)
+     fun generateMoreDeliveries(deliveries: List<Delivery>)
+
 }
