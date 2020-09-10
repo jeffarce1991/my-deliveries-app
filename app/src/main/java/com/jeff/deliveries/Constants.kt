@@ -1,4 +1,4 @@
-package com.jeff.template
+package com.jeff.deliveries
 
 class Constants private constructor() {
     object Gateways {

@@ -1,6 +1,6 @@
-package com.jeff.template.webservices.api.photos
+package com.jeff.deliveries.webservices.api.photos
 
-import com.jeff.template.webservices.dto.PhotoDto
+import com.jeff.deliveries.webservices.dto.PhotoDto
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET

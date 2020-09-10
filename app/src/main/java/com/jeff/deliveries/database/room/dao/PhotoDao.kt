@@ -1,7 +1,7 @@
-package com.jeff.template.database.room.dao
+package com.jeff.deliveries.database.room.dao
 
 import androidx.room.*
-import com.jeff.template.database.local.Photo
+import com.jeff.deliveries.database.local.Photo
 
 @Dao
 interface PhotoDao {

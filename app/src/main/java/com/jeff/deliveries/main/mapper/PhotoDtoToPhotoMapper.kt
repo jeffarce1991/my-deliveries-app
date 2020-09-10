@@ -1,7 +1,7 @@
-package com.jeff.template.main.mapper
+package com.jeff.deliveries.main.mapper
 
-import com.jeff.template.database.local.Photo
-import com.jeff.template.webservices.dto.PhotoDto
+import com.jeff.deliveries.database.local.Photo
+import com.jeff.deliveries.webservices.dto.PhotoDto
 import io.reactivex.Observable
 import io.reactivex.functions.Function
 

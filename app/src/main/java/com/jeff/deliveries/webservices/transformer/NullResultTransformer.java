@@ -1,7 +1,7 @@
-package com.jeff.template.webservices.transformer;
+package com.jeff.deliveries.webservices.transformer;
 
 
-import com.jeff.template.utilities.exception.NullResultException;
+import com.jeff.deliveries.utilities.exception.NullResultException;
 
 import io.reactivex.Single;
 import io.reactivex.SingleTransformer;

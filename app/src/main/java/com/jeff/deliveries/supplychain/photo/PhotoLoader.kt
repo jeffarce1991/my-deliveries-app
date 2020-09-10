@@ -1,6 +1,6 @@
-package com.jeff.template.supplychain.photo
+package com.jeff.deliveries.supplychain.photo
 
-import com.jeff.template.database.local.Photo
+import com.jeff.deliveries.database.local.Photo
 import io.reactivex.Single
 
 interface PhotoLoader {

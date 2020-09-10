@@ -1,4 +1,4 @@
-package com.jeff.template
+package com.jeff.deliveries
 
 import org.junit.Test
 

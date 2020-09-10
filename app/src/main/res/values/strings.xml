@@ -9,7 +9,7 @@
     <string name="content_description">Sample Content Description</string>
     <string name="cancel">Cancel</string>
     <string name="about">About</string>
-    <string name="about_description">A Template Project started in April, 2020 that use the latest tech stack i knew. \n\n</string>
+    <string name="about_description"> \n\n</string>
     <string name="notes">notes</string>
     <string name="save">save</string>
 </resources>

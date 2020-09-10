@@ -1,7 +1,5 @@
-package com.jeff.template.main.detail.presenter
+package com.jeff.deliveries.main.detail.presenter
 
-import com.jeff.template.main.detail.presenter.DefaultDetailsPresenter
-import com.jeff.template.main.detail.presenter.DetailsPresenter
 import dagger.Binds
 import dagger.Module
 

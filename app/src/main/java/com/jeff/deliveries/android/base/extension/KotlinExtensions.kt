@@ -1,4 +1,4 @@
-package com.jeff.template.android.base.extension
+package com.jeff.deliveries.android.base.extension
 
 import android.app.Activity
 import android.graphics.ColorMatrix
@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.jeff.template.R
+import com.jeff.deliveries.R
 import java.util.*
 import kotlin.math.abs
 

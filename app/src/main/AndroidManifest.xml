@@ -1,18 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jeff.template">
+    package="com.jeff.deliveries">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.jeff.template.MyApplication"
+        android:name="com.jeff.deliveries.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.jeff.template.main.list.view.MainActivity"
+        <activity android:name="com.jeff.deliveries.main.list.view.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.detail.view.DetailsActivity"
+            android:name="com.jeff.deliveries.main.detail.view.DetailsActivity"
             android:screenOrientation="portrait"
             />
     </application>

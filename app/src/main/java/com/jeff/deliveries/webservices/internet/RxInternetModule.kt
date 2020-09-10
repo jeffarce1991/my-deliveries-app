@@ -1,4 +1,4 @@
-package com.jeff.template.webservices.internet
+package com.jeff.deliveries.webservices.internet
 
 import dagger.Binds
 import dagger.Module

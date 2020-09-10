@@ -1,7 +1,7 @@
-package com.jeff.template.database.usecase.local.loader
+package com.jeff.deliveries.database.usecase.local.loader
 
-import com.jeff.template.database.local.Photo
-import com.jeff.template.database.room.dao.PhotoDao
+import com.jeff.deliveries.database.local.Photo
+import com.jeff.deliveries.database.room.dao.PhotoDao
 import io.reactivex.Single
 import javax.inject.Inject
 

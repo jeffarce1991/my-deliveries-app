@@ -1,20 +1,16 @@
-package com.jeff.template.main.detail.view
+package com.jeff.deliveries.main.detail.view
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import com.google.android.material.snackbar.Snackbar
 import com.hannesdorfmann.mosby.mvp.MvpActivity
 import com.jakewharton.picasso.OkHttp3Downloader
-import com.jeff.template.R
-import com.jeff.template.android.base.extension.hide
-import com.jeff.template.databinding.ActivityDetailsBinding
-import com.jeff.template.main.detail.presenter.DetailsPresenter
+import com.jeff.deliveries.R
+import com.jeff.deliveries.android.base.extension.hide
+import com.jeff.deliveries.databinding.ActivityDetailsBinding
+import com.jeff.deliveries.main.detail.presenter.DetailsPresenter
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.content_details.view.*

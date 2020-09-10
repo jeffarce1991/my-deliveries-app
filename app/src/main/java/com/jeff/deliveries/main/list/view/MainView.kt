@@ -1,7 +1,7 @@
-package com.jeff.template.main.list.view
+package com.jeff.deliveries.main.list.view
 
 import com.hannesdorfmann.mosby.mvp.MvpView
-import com.jeff.template.database.local.Photo
+import com.jeff.deliveries.database.local.Photo
 
 interface MainView : MvpView {
      fun hideProgress()

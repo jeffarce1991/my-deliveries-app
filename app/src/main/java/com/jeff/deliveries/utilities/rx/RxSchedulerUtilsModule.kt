@@ -1,4 +1,4 @@
-package com.jeff.template.utilities.rx
+package com.jeff.deliveries.utilities.rx
 
 import dagger.Binds
 import dagger.Module

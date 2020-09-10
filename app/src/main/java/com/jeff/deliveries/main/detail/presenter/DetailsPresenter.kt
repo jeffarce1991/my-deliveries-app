@@ -1,7 +1,7 @@
-package com.jeff.template.main.detail.presenter
+package com.jeff.deliveries.main.detail.presenter
 
 import com.hannesdorfmann.mosby.mvp.MvpPresenter
-import com.jeff.template.main.detail.view.DetailsView
+import com.jeff.deliveries.main.detail.view.DetailsView
 
 interface DetailsPresenter : MvpPresenter<DetailsView> {
 }

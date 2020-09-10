@@ -1,4 +1,4 @@
-package com.jeff.template.main.list.presenter
+package com.jeff.deliveries.main.list.presenter
 
 import dagger.Binds
 import dagger.Module

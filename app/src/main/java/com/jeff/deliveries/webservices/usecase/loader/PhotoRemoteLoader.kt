@@ -1,6 +1,6 @@
-package com.jeff.template.webservices.usecase.loader
+package com.jeff.deliveries.webservices.usecase.loader
 
-import com.jeff.template.webservices.dto.PhotoDto
+import com.jeff.deliveries.webservices.dto.PhotoDto
 import io.reactivex.Single
 
 interface PhotoRemoteLoader {

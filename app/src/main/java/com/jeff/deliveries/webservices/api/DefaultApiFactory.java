@@ -1,7 +1,7 @@
-package com.jeff.template.webservices.api;
+package com.jeff.deliveries.webservices.api;
 
-import com.jeff.template.BuildConfig;
-import com.jeff.template.Constants;
+import com.jeff.deliveries.BuildConfig;
+import com.jeff.deliveries.Constants;
 
 import javax.inject.Inject;
 

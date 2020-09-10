@@ -1,4 +1,4 @@
-package com.jeff.template.adapter
+package com.jeff.deliveries.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,13 +9,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bumptech.glide.Glide
 import com.jakewharton.picasso.OkHttp3Downloader
-import com.jeff.template.R
-import com.jeff.template.adapter.CustomAdapter.CustomViewHolder
-import com.jeff.template.database.local.Photo
-import com.jeff.template.databinding.CustomRowBinding
-import com.jeff.template.main.detail.view.DetailsActivity
+import com.jeff.deliveries.R
+import com.jeff.deliveries.adapter.CustomAdapter.CustomViewHolder
+import com.jeff.deliveries.database.local.Photo
+import com.jeff.deliveries.databinding.CustomRowBinding
+import com.jeff.deliveries.main.detail.view.DetailsActivity
 import com.squareup.picasso.Picasso
 
 internal class CustomAdapter(

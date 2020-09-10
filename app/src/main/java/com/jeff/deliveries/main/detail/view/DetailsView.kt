@@ -1,4 +1,4 @@
-package com.jeff.template.main.detail.view
+package com.jeff.deliveries.main.detail.view
 
 import com.hannesdorfmann.mosby.mvp.MvpView
 

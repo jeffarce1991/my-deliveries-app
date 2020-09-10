@@ -1,13 +1,13 @@
-package com.jeff.template
+package com.jeff.deliveries
 
 import android.app.Application
-import com.jeff.template.database.DatabaseModule
-import com.jeff.template.webservices.internet.RxInternetModule
-import com.jeff.template.main.MainModule
-import com.jeff.template.supplychain.photo.PhotoUseCaseModule
-import com.jeff.template.utilities.UtilityModule
-import com.jeff.template.webservices.api.ApiModule
-import com.jeff.template.webservices.usecase.WebServiceUseCaseModule
+import com.jeff.deliveries.database.DatabaseModule
+import com.jeff.deliveries.webservices.internet.RxInternetModule
+import com.jeff.deliveries.main.MainModule
+import com.jeff.deliveries.supplychain.photo.PhotoUseCaseModule
+import com.jeff.deliveries.utilities.UtilityModule
+import com.jeff.deliveries.webservices.api.ApiModule
+import com.jeff.deliveries.webservices.usecase.WebServiceUseCaseModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule

@@ -1,4 +1,4 @@
-package com.jeff.template.main.list.view
+package com.jeff.deliveries.main.list.view
 
 import android.app.ProgressDialog
 import android.app.ProgressDialog.*
@@ -9,14 +9,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.mosby.mvp.MvpActivity
-import com.jeff.template.BuildConfig
-import com.jeff.template.R
-import com.jeff.template.adapter.CustomAdapter
-import com.jeff.template.android.base.extension.invokeSimpleDialog
-import com.jeff.template.android.base.extension.longToast
-import com.jeff.template.database.local.Photo
-import com.jeff.template.databinding.ActivityMainBinding
-import com.jeff.template.main.list.presenter.MainPresenter
+import com.jeff.deliveries.BuildConfig
+import com.jeff.deliveries.R
+import com.jeff.deliveries.adapter.CustomAdapter
+import com.jeff.deliveries.android.base.extension.invokeSimpleDialog
+import com.jeff.deliveries.android.base.extension.longToast
+import com.jeff.deliveries.database.local.Photo
+import com.jeff.deliveries.databinding.ActivityMainBinding
+import com.jeff.deliveries.main.list.presenter.MainPresenter
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.content_main.view.*
 import javax.inject.Inject

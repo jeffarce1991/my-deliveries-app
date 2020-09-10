@@ -1,7 +1,7 @@
-package com.jeff.template.main.list.presenter
+package com.jeff.deliveries.main.list.presenter
 
 import com.hannesdorfmann.mosby.mvp.MvpPresenter
-import com.jeff.template.main.list.view.MainView
+import com.jeff.deliveries.main.list.view.MainView
 
 interface MainPresenter: MvpPresenter<MainView> {
     fun getPhoto(id: Int)

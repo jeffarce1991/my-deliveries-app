@@ -1,14 +1,10 @@
-package com.jeff.template.main.detail.presenter
+package com.jeff.deliveries.main.detail.presenter
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter
-import com.jeff.template.main.detail.view.DetailsView
-import com.jeff.template.main.detail.presenter.DetailsPresenter
-import com.jeff.template.utilities.rx.RxSchedulerUtils
-import com.jeff.template.webservices.internet.RxInternet
-import io.reactivex.CompletableObserver
-import io.reactivex.SingleObserver
+import com.jeff.deliveries.main.detail.view.DetailsView
+import com.jeff.deliveries.utilities.rx.RxSchedulerUtils
+import com.jeff.deliveries.webservices.internet.RxInternet
 import io.reactivex.disposables.Disposable
-import timber.log.Timber
 import javax.inject.Inject
 
 class DefaultDetailsPresenter @Inject

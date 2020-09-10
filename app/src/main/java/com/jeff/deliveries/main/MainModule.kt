@@ -1,10 +1,10 @@
-package com.jeff.template.main
+package com.jeff.deliveries.main
 
-import com.jeff.template.ActivityScope
-import com.jeff.template.main.detail.presenter.DetailsPresenterModule
-import com.jeff.template.main.detail.view.DetailsActivity
-import com.jeff.template.main.list.presenter.MainPresenterModule
-import com.jeff.template.main.list.view.MainActivity
+import com.jeff.deliveries.ActivityScope
+import com.jeff.deliveries.main.detail.presenter.DetailsPresenterModule
+import com.jeff.deliveries.main.detail.view.DetailsActivity
+import com.jeff.deliveries.main.list.presenter.MainPresenterModule
+import com.jeff.deliveries.main.list.view.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

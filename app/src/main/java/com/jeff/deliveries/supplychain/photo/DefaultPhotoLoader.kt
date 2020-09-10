@@ -1,11 +1,11 @@
-package com.jeff.template.supplychain.photo
+package com.jeff.deliveries.supplychain.photo
 
-import com.jeff.template.database.local.Photo
-import com.jeff.template.database.usecase.local.loader.PhotoLocalLoader
-import com.jeff.template.database.usecase.local.saver.PhotoLocalSaver
-import com.jeff.template.main.mapper.PhotoDtoToPhotoMapper
-import com.jeff.template.webservices.internet.RxInternet
-import com.jeff.template.webservices.usecase.loader.PhotoRemoteLoader
+import com.jeff.deliveries.database.local.Photo
+import com.jeff.deliveries.database.usecase.local.loader.PhotoLocalLoader
+import com.jeff.deliveries.database.usecase.local.saver.PhotoLocalSaver
+import com.jeff.deliveries.main.mapper.PhotoDtoToPhotoMapper
+import com.jeff.deliveries.webservices.internet.RxInternet
+import com.jeff.deliveries.webservices.usecase.loader.PhotoRemoteLoader
 import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject

@@ -1,6 +1,6 @@
-package com.jeff.template.utilities
+package com.jeff.deliveries.utilities
 
-import com.jeff.template.utilities.rx.RxSchedulerUtilsModule
+import com.jeff.deliveries.utilities.rx.RxSchedulerUtilsModule
 import dagger.Module
 
 
