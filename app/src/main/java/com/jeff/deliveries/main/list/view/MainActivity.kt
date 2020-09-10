@@ -1,7 +1,6 @@
 package com.jeff.deliveries.main.list.view
 
 import android.app.ProgressDialog
-import android.app.ProgressDialog.*
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,14 +13,11 @@ import com.hannesdorfmann.mosby.mvp.MvpActivity
 import com.jeff.deliveries.BuildConfig
 import com.jeff.deliveries.R
 import com.jeff.deliveries.adapter.DeliveriesAdapter
-import com.jeff.deliveries.android.base.extension.hide
 import com.jeff.deliveries.android.base.extension.invokeSimpleDialog
-import com.jeff.deliveries.android.base.extension.longToast
 import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.databinding.ActivityMainBinding
 import com.jeff.deliveries.main.list.presenter.MainPresenter
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.content_details.view.*
 import kotlinx.android.synthetic.main.content_main.view.*
 import timber.log.Timber
 import javax.inject.Inject

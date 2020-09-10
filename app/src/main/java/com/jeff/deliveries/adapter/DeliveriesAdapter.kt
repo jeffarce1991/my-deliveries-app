@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.jeff.deliveries.R
 import com.jeff.deliveries.adapter.DeliveriesAdapter.CustomViewHolder
-import com.jeff.deliveries.android.base.extension.hide
 import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.databinding.ItemDeliveryBinding
 
