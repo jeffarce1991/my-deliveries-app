@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.jeff.deliveries.R
 import com.jeff.deliveries.database.room.AppDatabase
-import com.jeff.deliveries.database.room.dao.PhotoDao
+import com.jeff.deliveries.database.room.dao.DeliveryDao
 import com.jeff.deliveries.database.usecase.local.LocalUseCaseModule
 import dagger.Module
 import dagger.Provides
@@ -25,7 +25,7 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideAssignmentDao(appDatabase: AppDatabase): PhotoDao {
+    fun provideAssignmentDao(appDatabase: AppDatabase): DeliveryDao {
         return appDatabase.photoDao()
     }
 }

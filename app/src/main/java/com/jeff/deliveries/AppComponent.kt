@@ -4,7 +4,7 @@ import android.app.Application
 import com.jeff.deliveries.database.DatabaseModule
 import com.jeff.deliveries.webservices.internet.RxInternetModule
 import com.jeff.deliveries.main.MainModule
-import com.jeff.deliveries.supplychain.photo.PhotoUseCaseModule
+import com.jeff.deliveries.supplychain.deliveries.DeliveriesUseCaseModule
 import com.jeff.deliveries.utilities.UtilityModule
 import com.jeff.deliveries.webservices.api.ApiModule
 import com.jeff.deliveries.webservices.usecase.WebServiceUseCaseModule
@@ -22,7 +22,7 @@ import javax.inject.Singleton
     DatabaseModule::class,
     ApiModule::class,
     WebServiceUseCaseModule::class,
-    PhotoUseCaseModule::class])
+    DeliveriesUseCaseModule::class])
 @Singleton
 interface AppComponent {
 
