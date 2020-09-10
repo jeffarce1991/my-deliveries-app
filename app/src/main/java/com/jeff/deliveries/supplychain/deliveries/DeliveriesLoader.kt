@@ -6,6 +6,8 @@ import io.reactivex.Single
 interface DeliveriesLoader {
 
     fun loadInitial(): Single<List<Delivery>>
+    fun loadMoreDeliveries(offset: Int): Single<List<Delivery>>
 
-    fun loadAllFromLocal(): Single<List<Delivery>>
+    fun loadInitialLocally(): Single<List<Delivery>>
+    fun loadMoreDeliveriesLocally(offset: Int): Single<List<Delivery>>
 }
