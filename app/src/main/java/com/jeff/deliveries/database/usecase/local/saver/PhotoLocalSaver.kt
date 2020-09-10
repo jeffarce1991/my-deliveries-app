@@ -1,12 +1,12 @@
 package com.jeff.deliveries.database.usecase.local.saver
 
-import com.jeff.deliveries.database.local.Photo
+import com.jeff.deliveries.database.local.Delivery
 import io.reactivex.Completable
 import io.reactivex.Observable
 
 interface PhotoLocalSaver {
 
-    fun save(photo: Photo): Completable
+    fun save(delivery: Delivery): Completable
 
-    fun saveAll(photos: List<Photo>): Observable<List<Photo>>
+    fun saveAll(deliveries: List<Delivery>): Observable<List<Delivery>>
 }

@@ -1,23 +1,16 @@
 package com.jeff.deliveries.main.list.presenter
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter
-import com.jeff.deliveries.Constants
-import com.jeff.deliveries.database.local.Photo
+import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.database.usecase.local.loader.PhotoLocalLoader
 import com.jeff.deliveries.database.usecase.local.saver.PhotoLocalSaver
 import com.jeff.deliveries.webservices.exception.NoInternetException
 import com.jeff.deliveries.webservices.internet.RxInternet
 import com.jeff.deliveries.main.list.view.MainView
-import com.jeff.deliveries.supplychain.photo.PhotoLoader
-import com.jeff.deliveries.webservices.dto.PhotoDto
-import com.jeff.deliveries.webservices.api.photos.PhotosApi
-import com.jeff.deliveries.webservices.api.RetrofitClientInstance
+import com.jeff.deliveries.supplychain.deliveries.DeliveriesLoader
 import com.jeff.deliveries.utilities.rx.RxSchedulerUtils
 import io.reactivex.*
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,7 +20,7 @@ constructor(
     private val localLoader: PhotoLocalLoader,
     private val localSaver: PhotoLocalSaver,
     private val schedulerUtils: RxSchedulerUtils,
-    private val loader: PhotoLoader
+    private val loader: DeliveriesLoader
 ) : MvpBasePresenter<MainView>(),
     MainPresenter {
 
@@ -35,22 +28,12 @@ constructor(
 
     lateinit var disposable: Disposable
 
-    private fun getApi(): PhotosApi {
-
-        /*Create handle for the RetrofitInstance interface*/
-        return RetrofitClientInstance.getRxRetrofitInstance(
-            Constants.Gateways.JSONPLACEHOLDER
-        )!!.create(
-            PhotosApi::class.java
-        )
-    }
-
-    override fun getPhotos() {
+    override fun loadInitialDeliveries() {
         internet.isConnected()
-            .andThen(loader.loadAll())
+            .andThen(loader.loadInitial())
             .compose(schedulerUtils.forSingle())
-            .subscribe(object : SingleObserver<List<Photo>>{
-                override fun onSuccess(t: List<Photo>) {
+            .subscribe(object : SingleObserver<List<Delivery>>{
+                override fun onSuccess(t: List<Delivery>) {
                     Timber.d("==q onError $t" )
                     view.hideProgress()
                     if (t.isNotEmpty()) {
@@ -74,7 +57,7 @@ constructor(
                     view.hideProgress()
 
                     if (e is NoInternetException) {
-                        getPhotosFromLocal()
+                        //getPhotosFromLocal()
                     } else {
                         dispose()
                     }
@@ -82,49 +65,16 @@ constructor(
             })
     }
 
-    override fun getPhoto(id: Int) {
-            internet.isConnected()
-                .andThen(getApi().loadPhotoById(id))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<Response<PhotoDto>> {
-
-                    override fun onSubscribe(d: Disposable) {
-                        view.showProgress()
-
-                        disposable = d
-                        Timber.d("==q onSubscribe")
-                    }
-
-                    override fun onSuccess(t: Response<PhotoDto>) {
-                        view.hideProgress()
-                        view.generateDataList(mapPhotoDtosToPhotos(listOf(t.body()!!)))
-
-                        dispose()
-                        Timber.d("==q onSuccess")
-                    }
-                    override fun onError(e: Throwable) {
-                        view.hideProgress()
-
-                        dispose()
-                        Timber.e(e)
-                        Timber.d("==q onError")
-                        e.printStackTrace()
-                    }
-                })
-    }
-
-
     fun getPhotosFromLocal(){
         loader.loadAllFromLocal()
             .compose(schedulerUtils.forSingle())
-            .subscribe(object : SingleObserver<List<Photo>>{
+            .subscribe(object : SingleObserver<List<Delivery>>{
                 override fun onSubscribe(d: Disposable) {
                     disposable = d
                     view.showProgress()
                 }
 
-                override fun onSuccess(t: List<Photo>) {
+                override fun onSuccess(t: List<Delivery>) {
                     Timber.d("==q loadAll onSuccess ${t.size}")
 
                     view.hideProgress()
@@ -146,21 +96,6 @@ constructor(
 
                 }
             })
-    }
-
-    private fun mapPhotoDtosToPhotos(photoDtos: List<PhotoDto>): List<Photo> {
-        val photos = mutableListOf<Photo>()
-        for (photoDto in photoDtos) {
-            val photo = Photo(
-                photoDto.id,
-                photoDto.albumId,
-                photoDto.title,
-                photoDto.url,
-                photoDto.thumbnailUrl
-            )
-            photos.add(photo)
-        }
-        return photos
     }
 
     override fun attachView(view: MainView) {

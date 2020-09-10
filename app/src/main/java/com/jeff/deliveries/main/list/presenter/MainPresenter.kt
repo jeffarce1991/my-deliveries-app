@@ -4,6 +4,5 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter
 import com.jeff.deliveries.main.list.view.MainView
 
 interface MainPresenter: MvpPresenter<MainView> {
-    fun getPhoto(id: Int)
-    fun getPhotos()
+    fun loadInitialDeliveries()
 }

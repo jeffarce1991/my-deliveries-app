@@ -1,7 +1,7 @@
 package com.jeff.deliveries.main.list.view
 
 import com.hannesdorfmann.mosby.mvp.MvpView
-import com.jeff.deliveries.database.local.Photo
+import com.jeff.deliveries.database.local.Delivery
 
 interface MainView : MvpView {
      fun hideProgress()
@@ -11,5 +11,5 @@ interface MainView : MvpView {
 
      fun showLoadingDataFailed()
      fun showToast(message: String)
-     fun generateDataList(photos: List<Photo>)
+     fun generateDataList(deliveries: List<Delivery>)
 }

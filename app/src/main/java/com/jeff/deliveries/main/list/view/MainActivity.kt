@@ -14,7 +14,7 @@ import com.jeff.deliveries.R
 import com.jeff.deliveries.adapter.CustomAdapter
 import com.jeff.deliveries.android.base.extension.invokeSimpleDialog
 import com.jeff.deliveries.android.base.extension.longToast
-import com.jeff.deliveries.database.local.Photo
+import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.databinding.ActivityMainBinding
 import com.jeff.deliveries.main.list.presenter.MainPresenter
 import dagger.android.AndroidInjection
@@ -29,7 +29,7 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(),
 
     private lateinit var mainBinding : ActivityMainBinding
 
-    lateinit var photos : List<Photo>
+    lateinit var deliveries : List<Delivery>
 
 
     @Inject
@@ -42,11 +42,11 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(),
         setContentView(R.layout.activity_main)
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        mainPresenter.getPhotos()
+        mainPresenter.loadInitialDeliveries()
 
         setUpToolbarTitle()
         mainBinding.root.swipeRefreshLayout.setOnRefreshListener {
-            mainPresenter.getPhotos()
+            mainPresenter.loadInitialDeliveries()
         }
     }
 
@@ -79,8 +79,8 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(),
 
 
     //Method to generate List of data using RecyclerView with custom com.project.retrofit.adapter*//*
-    override fun generateDataList(photos: List<Photo>) {
-        adapter = CustomAdapter(this, photos)
+    override fun generateDataList(deliveries: List<Delivery>) {
+        adapter = CustomAdapter(this, deliveries)
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this@MainActivity)
         mainBinding.root.customRecyclerView.layoutManager = layoutManager
         mainBinding.root.customRecyclerView.adapter = adapter
