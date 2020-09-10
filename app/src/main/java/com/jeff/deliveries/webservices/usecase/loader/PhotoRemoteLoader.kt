@@ -1,9 +1,9 @@
 package com.jeff.deliveries.webservices.usecase.loader
 
-import com.jeff.deliveries.webservices.dto.PhotoDto
+import com.jeff.deliveries.webservices.dto.DeliveryDto
 import io.reactivex.Single
 
 interface PhotoRemoteLoader {
 
-    fun loadAll(): Single<List<PhotoDto>>
+    fun loadInitial(): Single<List<DeliveryDto>>
 }
