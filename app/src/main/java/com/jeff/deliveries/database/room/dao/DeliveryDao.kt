@@ -16,6 +16,9 @@ interface DeliveryDao {
             " WHERE title LIKE :title AND title LIMIT 1")
     fun findByTitle(title: String): Delivery*/
 
+    @Query("Select * FROM " + Delivery.TABLE_NAME + " LIMIT 20 OFFSET :offset")
+    fun loadMoreDeliveries(offset: Int): List<Delivery>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(deliveries: List<Delivery>)
 
