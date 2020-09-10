@@ -7,8 +7,8 @@ import com.jeff.deliveries.webservices.transformer.ResponseCodeNot200SingleTrans
 import io.reactivex.Single
 import javax.inject.Inject
 
-class DefaultPhotoRemoteLoader @Inject
-constructor(private val apiFactory: ApiFactory): PhotoRemoteLoader {
+class DefaultDeliveriesRemoteLoader @Inject
+constructor(private val apiFactory: ApiFactory): DeliveriesRemoteLoader {
 
     override fun loadInitial(): Single<List<DeliveryDto>> {
         return apiFactory.create(DeliveriesApi::class.java)
