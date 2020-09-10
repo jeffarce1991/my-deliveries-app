@@ -1,5 +1,8 @@
-# my-template-project
-A Android Template Project where I impemented : 
+# my-deliveries-app
+
+Shows the users deliveries including receivers photo and item description also shows details screen when items are clicked.
+
+Impemented Tech Stacks: 
   - Kotlin
   - Retrofit
   - Proguard
@@ -10,7 +13,4 @@ A Android Template Project where I impemented :
   - AndroidX
   - Recylerview
   
-Description : 
-  - Shows List of Photos
-  - Shows Details of each Photos (Collapsible Header Toolbar)
-  - Shimmer
+
