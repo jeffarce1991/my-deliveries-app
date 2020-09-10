@@ -1,6 +1,6 @@
 <!DOCTYPE resources [
     <!ENTITY app_name "My Template App">
-    <!ENTITY db_name "pft-database.sql">
+    <!ENTITY db_name "mda-database.sql">
     ]>
 <resources>
     <string name="db_name">&db_name;</string>
