@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.hannesdorfmann.mosby.mvp.MvpActivity
 import com.jeff.deliveries.BuildConfig
 import com.jeff.deliveries.R
-import com.jeff.deliveries.adapter.CustomAdapter
+import com.jeff.deliveries.adapter.DeliveriesAdapter
 import com.jeff.deliveries.android.base.extension.hide
 import com.jeff.deliveries.android.base.extension.invokeSimpleDialog
 import com.jeff.deliveries.android.base.extension.longToast
@@ -29,7 +29,7 @@ import javax.inject.Inject
 
 class MainActivity : MvpActivity<MainView, MainPresenter>(),
     MainView {
-    private lateinit var adapter: CustomAdapter
+    private lateinit var adapter: DeliveriesAdapter
     private lateinit var progressDialog: ProgressDialog
 
     private lateinit var binding : ActivityMainBinding
@@ -118,7 +118,7 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(),
 
     //Method to generate List of data using RecyclerView with custom com.project.retrofit.adapter*//*
     override fun generateDeliveryList(deliveries: List<Delivery>) {
-        adapter = CustomAdapter(this, deliveries as MutableList<Delivery>)
+        adapter = DeliveriesAdapter(this, deliveries as MutableList<Delivery>)
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this@MainActivity)
         binding.root.customRecyclerView.layoutManager = layoutManager
         binding.root.customRecyclerView.adapter = adapter

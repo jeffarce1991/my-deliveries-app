@@ -2,6 +2,7 @@ package com.jeff.deliveries.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,16 +12,17 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.jeff.deliveries.R
-import com.jeff.deliveries.adapter.CustomAdapter.CustomViewHolder
+import com.jeff.deliveries.adapter.DeliveriesAdapter.CustomViewHolder
+import com.jeff.deliveries.android.base.extension.hide
 import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.databinding.ItemDeliveryBinding
 
-internal class CustomAdapter(
+internal class DeliveriesAdapter(
     private val context: Context,
-    private val dataList: List<Delivery>
+    private val dataList: MutableList<Delivery>
 ) : RecyclerView.Adapter<CustomViewHolder>() {
 
-    internal inner class CustomViewHolder(binding: ItemDeliveryBinding) :
+    internal class CustomViewHolder(binding: ItemDeliveryBinding) :
         ViewHolder(binding.root) {
         var itemLayout: ConstraintLayout = binding.itemLayout
         var from: TextView = binding.from
@@ -28,6 +30,9 @@ internal class CustomAdapter(
         var price: TextView = binding.price
         val thumbnail: ImageView = binding.thumbnail
         val favorite: TextView = binding.favorite
+        val fromShimmer: View = binding.fromShimmer
+        val toShimmer: View = binding.toShimmer
+        val priceShimmer: View = binding.priceShimmer
 
     }
 
@@ -41,10 +46,11 @@ internal class CustomAdapter(
         return CustomViewHolder(binding)
     }
 
+
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val item = dataList[position]
-        holder.from.text = String.format("From: ${item.route.start}")
-        holder.to.text = String.format("To: ${item.route.end}")
+        holder.from.text = item.route.start
+        holder.to.text = item.route.end
         val deliveryFee: String = item.deliveryFee.replace("$", "")
         val surcharge: String = item.deliveryFee.replace("$", "")
 
@@ -76,8 +82,17 @@ internal class CustomAdapter(
         }
     }
 
+    fun addAll(users: MutableList<Delivery>) {
+        dataList.addAll(users)
+        notifyDataSetChanged()
+        notifyItemRangeInserted(dataList.lastIndex, users.size)
+    }
+
     override fun getItemCount(): Int {
         return dataList.size
     }
 
+    fun getLastIndex(): Int {
+        return dataList.lastIndex
+    }
 }
