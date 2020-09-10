@@ -2,8 +2,6 @@ package com.jeff.deliveries.main.list.presenter
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter
 import com.jeff.deliveries.database.local.Delivery
-import com.jeff.deliveries.database.usecase.local.loader.PhotoLocalLoader
-import com.jeff.deliveries.database.usecase.local.saver.PhotoLocalSaver
 import com.jeff.deliveries.webservices.exception.NoInternetException
 import com.jeff.deliveries.webservices.internet.RxInternet
 import com.jeff.deliveries.main.list.view.MainView
@@ -17,8 +15,6 @@ import javax.inject.Inject
 class DefaultMainPresenter @Inject
 constructor(
     private val internet: RxInternet,
-    private val localLoader: PhotoLocalLoader,
-    private val localSaver: PhotoLocalSaver,
     private val schedulerUtils: RxSchedulerUtils,
     private val loader: DeliveriesLoader
 ) : MvpBasePresenter<MainView>(),
@@ -26,7 +22,8 @@ constructor(
 
     lateinit var view: MainView
 
-    lateinit var disposable: Disposable
+    lateinit var remoteDisposable: Disposable
+    lateinit var localDisposable: Disposable
 
     override fun loadInitialDeliveries() {
         internet.isConnected()
@@ -34,20 +31,22 @@ constructor(
             .compose(schedulerUtils.forSingle())
             .subscribe(object : SingleObserver<List<Delivery>>{
                 override fun onSuccess(t: List<Delivery>) {
-                    Timber.d("==q onError $t" )
+                    Timber.d("==q onSuccess $t" )
                     view.hideProgress()
+
                     if (t.isNotEmpty()) {
-                        view.generateDataList(t)
-                        view.showToast("Data loaded Remotely")
+                        view.generateDeliveryList(t)
+                        view.showMessage("${t.size} of Deliveries loaded remotely")
                     } else {
-                        view.showLoadingDataFailed()
+                        view.showMessage("No existing cached data.")
                     }
+
                     dispose()
                 }
 
                 override fun onSubscribe(d: Disposable) {
                     view.showProgress()
-                    disposable = d
+                    remoteDisposable = d
                 }
 
                 override fun onError(e: Throwable) {
@@ -55,6 +54,7 @@ constructor(
                     e.printStackTrace()
 
                     view.hideProgress()
+
 
                     if (e is NoInternetException) {
                         //getPhotosFromLocal()
@@ -65,35 +65,111 @@ constructor(
             })
     }
 
-    fun getPhotosFromLocal(){
-        loader.loadAllFromLocal()
+    override fun loadInitialLocally(){
+        loader.loadInitialLocally()
             .compose(schedulerUtils.forSingle())
             .subscribe(object : SingleObserver<List<Delivery>>{
                 override fun onSubscribe(d: Disposable) {
-                    disposable = d
-                    view.showProgress()
+                    localDisposable = d
+                    //view.showProgress()
                 }
 
                 override fun onSuccess(t: List<Delivery>) {
-                    Timber.d("==q loadAll onSuccess ${t.size}")
+                    Timber.d("==q loadInitialLocally onSuccess ${t.size}")
 
-                    view.hideProgress()
+                    //view.hideProgress()
 
                     if (t.isNotEmpty()) {
-                        view.showToast("Data loaded Locally")
-                        view.generateDataList(t)
+                        view.generateDeliveryList(t)
                     } else {
-                        view.showLoadingDataFailed()
+                        view.showMessage("No existing cached data.")
                     }
-                    dispose()
+                    dispose(localDisposable)
                 }
 
                 override fun onError(e: Throwable) {
                     Timber.d("==q Load Photos Failed $e")
 
-                    view.hideProgress()
-                    dispose()
+                    view.showMessage(e.message!!)
+                    //view.hideProgress()
+                    dispose(localDisposable)
 
+                }
+            })
+    }
+
+
+    override fun loadMoreDeliveriesLocally(offset: Int){
+        internet.notConnected()
+            .andThen(loader.loadMoreDeliveriesLocally(offset))
+            .compose(schedulerUtils.forSingle())
+            .subscribe(object : SingleObserver<List<Delivery>>{
+                override fun onSubscribe(d: Disposable) {
+                    localDisposable = d
+                    //view.showProgress()
+                }
+
+                override fun onSuccess(t: List<Delivery>) {
+                    Timber.d("==q loadMoreDeliveriesLocally onSuccess ${t[0].route.end}")
+
+                    //view.hideProgress()
+
+                    if (t.isNotEmpty()) {
+                        view.generateDeliveryList(t)
+                    } else {
+                        view.showMessage("No existing cached data.")
+                    }
+                    dispose(localDisposable)
+                }
+
+                override fun onError(e: Throwable) {
+                    Timber.d("==q Load Photos Failed $e")
+
+                    view.showMessage(e.message!!)
+                    //view.hideProgress()
+                    dispose(localDisposable)
+
+                }
+            })
+    }
+
+    override fun loadMoreDeliveries(offset: Int) {
+        internet.isConnected()
+            .andThen(loader.loadMoreDeliveries(offset))
+            .compose(schedulerUtils.forSingle())
+            .subscribe(object : SingleObserver<List<Delivery>>{
+                override fun onSuccess(t: List<Delivery>) {
+                    Timber.d("==q onSuccess $t" )
+                    view.hideProgress()
+
+                    if (t.isNotEmpty()) {
+                        view.generateMoreDeliveries(t)
+                        view.showMessage("Data loaded Remotely")
+                    } else {
+                        view.showMessage("Loading Data Failed")
+                    }
+
+                    dispose()
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    Timber.d("==q onSubscribe $offset" )
+                    view.showProgress()
+                    remoteDisposable = d
+                }
+
+                override fun onError(e: Throwable) {
+                    Timber.d("==q onError $e" )
+                    e.printStackTrace()
+
+                    view.hideProgress()
+
+
+                    if (e is NoInternetException) {
+                        //loadMoreDeliveriesLocally(offset)
+                    } else {
+                        dispose()
+                    }
                 }
             })
     }
@@ -104,6 +180,10 @@ constructor(
     }
 
     private fun dispose() {
+        if (!remoteDisposable.isDisposed) remoteDisposable.dispose()
+    }
+
+    private fun dispose(disposable: Disposable) {
         if (!disposable.isDisposed) disposable.dispose()
     }
 
