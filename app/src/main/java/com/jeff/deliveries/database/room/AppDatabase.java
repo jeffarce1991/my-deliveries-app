@@ -21,5 +21,5 @@ import com.jeff.deliveries.database.room.dao.DeliveryDao;
                 DeliveryConverter.class
         })
 public abstract class AppDatabase extends RoomDatabase {
-        public abstract DeliveryDao photoDao();
+        public abstract DeliveryDao deliveryDao();
 }

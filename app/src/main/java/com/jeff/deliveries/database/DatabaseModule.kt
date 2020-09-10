@@ -26,6 +26,6 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideAssignmentDao(appDatabase: AppDatabase): DeliveryDao {
-        return appDatabase.photoDao()
+        return appDatabase.deliveryDao()
     }
 }
