@@ -57,8 +57,7 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(),
     private fun setUpToolbarTitle() {
         setSupportActionBar(binding.toolbar)
 
-        //supportActionBar!!.title = getString(R.string.app_name)
-        supportActionBar!!.title = resources.getString(R.string.app_name)
+        supportActionBar!!.title = getString(R.string.my_deliveries)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

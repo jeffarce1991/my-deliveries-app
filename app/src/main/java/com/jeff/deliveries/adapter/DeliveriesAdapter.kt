@@ -15,6 +15,7 @@ import com.jeff.deliveries.R
 import com.jeff.deliveries.adapter.DeliveriesAdapter.CustomViewHolder
 import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.databinding.ItemDeliveryBinding
+import com.jeff.deliveries.main.detail.view.DetailsActivity
 
 internal class DeliveriesAdapter(
     private val context: Context,
@@ -29,9 +30,9 @@ internal class DeliveriesAdapter(
         var price: TextView = binding.price
         val thumbnail: ImageView = binding.thumbnail
         val favorite: TextView = binding.favorite
-        val fromShimmer: View = binding.fromShimmer
-        val toShimmer: View = binding.toShimmer
-        val priceShimmer: View = binding.priceShimmer
+        val fromShimmer: View = binding.fromListShimmer
+        val toShimmer: View = binding.toListShimmer
+        val priceShimmer: View = binding.priceListShimmer
 
     }
 
@@ -58,8 +59,8 @@ internal class DeliveriesAdapter(
         } else {
             holder.favorite.hide()
         }*/
-
-        holder.price.text = String.format("$${surcharge.toFloat() + deliveryFee.toFloat()}")
+        val price = String.format("$${surcharge.toFloat() + deliveryFee.toFloat()}")
+        holder.price.text = price
 
         Glide
             .with(context)
@@ -70,14 +71,15 @@ internal class DeliveriesAdapter(
             .into(holder.thumbnail)
 
         holder.itemLayout.setOnClickListener {
-            /*val intent = DetailsActivity.getStartIntent(
+            val intent = DetailsActivity.getStartIntent(
                 context,
                 item.id,
-                item.title,
-                item.url,
-                item.thumbnailUrl
+                item.route.start,
+                item.route.end,
+                item.goodsPicture,
+                price
             )
-            context.startActivity(intent)*/
+            context.startActivity(intent)
         }
     }
 

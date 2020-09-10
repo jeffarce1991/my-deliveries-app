@@ -63,7 +63,7 @@
 
         <View
             android:visibility="gone"
-            android:id="@+id/from_shimmer"
+            android:id="@+id/from_list_shimmer"
             android:layout_width="100dp"
             android:layout_height="22dp"
             android:layout_marginTop="@dimen/screen_margin"
@@ -97,7 +97,7 @@
 
         <View
             android:visibility="gone"
-            android:id="@+id/to_shimmer"
+            android:id="@+id/to_list_shimmer"
             android:layout_width="100dp"
             android:layout_height="22dp"
             android:layout_marginTop="@dimen/screen_margin"
@@ -130,7 +130,7 @@
 
         <View
             android:visibility="gone"
-            android:id="@+id/price_shimmer"
+            android:id="@+id/price_list_shimmer"
             android:layout_width="40dp"
             android:layout_height="22dp"
             android:layout_margin="@dimen/screen_margin"

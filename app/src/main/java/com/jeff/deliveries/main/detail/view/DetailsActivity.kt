@@ -14,6 +14,11 @@ import com.jeff.deliveries.main.detail.presenter.DetailsPresenter
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.content_details.view.*
+import kotlinx.android.synthetic.main.content_details.view.from
+import kotlinx.android.synthetic.main.content_details.view.from_shimmer
+import kotlinx.android.synthetic.main.content_details.view.to
+import kotlinx.android.synthetic.main.content_details.view.to_shimmer
+import kotlinx.android.synthetic.main.item_delivery.view.*
 import javax.inject.Inject
 
 
@@ -22,24 +27,25 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
 
     companion object {
         private var EXTRA_ID = "EXTRA_ID"
-        private var EXTRA_TITLE = "EXTRA_TITLE"
-        private var EXTRA_URL = "EXTRA_URL"
-        private var EXTRA_THUMBNAIL_URL = "EXTRA_THUMBNAIL_URL"
+        private var EXTRA_START = "EXTRA_START"
+        private var EXTRA_END = "EXTRA_END"
+        private var EXTRA_GOODS_PICTURE = "EXTRA_GOODS_PICTURE"
+        private var EXTRA_PRICE = "EXTRA_PRICE"
 
         fun getStartIntent(
             context: Context,
-            id : Int,
-            title : String,
-            url : String,
-            thumbnailUrl : String
-
-
+            id : String,
+            start : String,
+            end : String,
+            goodsPicture : String,
+            price: String
         ): Intent {
             return Intent(context, DetailsActivity::class.java)
                 .putExtra(EXTRA_ID, id)
-                .putExtra(EXTRA_TITLE, title)
-                .putExtra(EXTRA_URL, url)
-                .putExtra(EXTRA_THUMBNAIL_URL, thumbnailUrl)
+                .putExtra(EXTRA_START, start)
+                .putExtra(EXTRA_END, end)
+                .putExtra(EXTRA_GOODS_PICTURE, goodsPicture)
+                .putExtra(EXTRA_PRICE, price)
         }
     }
 
@@ -57,7 +63,11 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
 
         setupToolbar()
         startShimmerAnimations()
-        setDetails(getUrl()!!, getTittle()!!)
+        Thread.sleep(2)
+        stopShimmerAnimations()
+        hideShimmerPlaceholders()
+
+        setDetails(getStart()!!, getEnd()!!, getGoodsPicture()!!, getPrice()!!)
         //userDetailsPresenter.loadUserDetails(getUserName()!!, getId()!!)
         //userDetailsPresenter.loadNotes(getId()!!)
         /*binding.root.save_notes.setOnClickListener {
@@ -68,15 +78,16 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
         }*/
     }
 
-    private fun getUrl(): String? = intent.getStringExtra(EXTRA_URL)
-    private fun getThumnailUrl(): String? = intent.getStringExtra(EXTRA_THUMBNAIL_URL)
-    private fun getTittle(): String? = intent.getStringExtra(EXTRA_TITLE)
     private fun getId(): Int? = intent.getIntExtra(EXTRA_ID, -1)
+    private fun getStart(): String? = intent.getStringExtra(EXTRA_START)
+    private fun getEnd(): String? = intent.getStringExtra(EXTRA_END)
+    private fun getGoodsPicture(): String? = intent.getStringExtra(EXTRA_GOODS_PICTURE)
+    private fun getPrice(): String? = intent.getStringExtra(EXTRA_PRICE)
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
 
-        supportActionBar!!.title = intent.getStringExtra(resources.getString(R.string.app_name))
+        supportActionBar!!.title = intent.getStringExtra(resources.getString(R.string.delivery_details))
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
@@ -84,30 +95,18 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
         return detailsPresenter
     }
 
-    private fun setDetails(url: String, title: String) {
+    private fun setDetails(from: String, to: String, goodsPicture: String, price: String) {
         val builder = Picasso.Builder(this)
         builder.downloader(OkHttp3Downloader(this))
-        builder.build().load(url)
+        builder.build().load(goodsPicture)
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_background)
-            .into(binding.headerImage)
+            .into(binding.root.goods_to_deliver)
 
-        binding.root.name.text = title
-
-        stopShimmerAnimations()
-        hideShimmerPlaceholders()
-
-        /*Glide
-            .with(this)
-            .load(url)
-            .centerCrop()
-            .placeholder(ColorDrawable(resources.getColor(R.color.colorPrimary)))
-            .into(binding.headerImage)*/
+        binding.root.from.text = from
+        binding.root.to.text = to
+        binding.root.to.text = price
     }
-
-    /*override fun setNotes(notes: Notes) {
-        binding.root.notes.setText(notes.content)
-    }*/
 
     override fun showMessage(message: String) {
         Snackbar.make(binding.coordLayout,
@@ -118,15 +117,15 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
 
     override fun startShimmerAnimations() {
         binding.root.shimmer_details_container.startShimmerAnimation()
-        binding.root.shimmer_follows_container.startShimmerAnimation()
     }
 
     override fun hideShimmerPlaceholders() {
-        binding.root.name_shimmer.hide()
+        binding.root.from_shimmer.hide()
+        binding.root.to_shimmer.hide()
+        binding.root.delivery_fee_shimmer.hide()
     }
 
     override fun stopShimmerAnimations() {
-        binding.root.shimmer_details_container.stopShimmerAnimation();
-        binding.root.shimmer_follows_container.stopShimmerAnimation();
+        binding.root.shimmer_details_container.stopShimmerAnimation()
     }
 }
