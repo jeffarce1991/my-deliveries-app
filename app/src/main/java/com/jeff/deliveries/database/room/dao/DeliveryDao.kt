@@ -1,0 +1,28 @@
+package com.jeff.deliveries.database.room.dao
+
+import androidx.room.*
+import com.jeff.deliveries.database.local.Delivery
+
+@Dao
+interface DeliveryDao {
+    @Query("Select * FROM " + Delivery.TABLE_NAME)
+    fun loadAll(): List<Delivery>
+
+    @Query("Select * FROM " + Delivery.TABLE_NAME +
+            " WHERE "+ Delivery.COLUMN_ID +" IN (:id)")
+    fun loadAllByIds(id: IntArray): List<Delivery>
+
+   /* @Query("SELECT * FROM " + Delivery.TABLE_NAME +
+            " WHERE title LIKE :title AND title LIMIT 1")
+    fun findByTitle(title: String): Delivery*/
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(deliveries: List<Delivery>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(delivery: Delivery)
+
+    @Delete
+    fun delete(delivery: Delivery)
+
+}
