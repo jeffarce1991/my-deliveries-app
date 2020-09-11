@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.jeff.deliveries.R
 import com.jeff.deliveries.database.room.AppDatabase
 import com.jeff.deliveries.database.room.dao.DeliveryDao
+import com.jeff.deliveries.database.room.dao.FavoritesDao
 import com.jeff.deliveries.database.usecase.local.LocalUseCaseModule
 import dagger.Module
 import dagger.Provides
@@ -27,5 +28,11 @@ class DatabaseModule {
     @Singleton
     fun provideAssignmentDao(appDatabase: AppDatabase): DeliveryDao {
         return appDatabase.deliveryDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavoritesDao(appDatabase: AppDatabase): FavoritesDao {
+        return appDatabase.favoritesDao()
     }
 }

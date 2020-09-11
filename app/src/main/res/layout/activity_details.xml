@@ -58,7 +58,7 @@
         >
 
     <Button
-        android:id="@+id/view_seat_map"
+        android:id="@+id/save_favorite"
         style="@style/TextAppearance.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

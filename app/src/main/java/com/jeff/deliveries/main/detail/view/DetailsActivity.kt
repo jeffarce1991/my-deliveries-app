@@ -9,10 +9,13 @@ import com.hannesdorfmann.mosby.mvp.MvpActivity
 import com.jakewharton.picasso.OkHttp3Downloader
 import com.jeff.deliveries.R
 import com.jeff.deliveries.android.base.extension.hide
+import com.jeff.deliveries.android.base.extension.show
+import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.databinding.ActivityDetailsBinding
 import com.jeff.deliveries.main.detail.presenter.DetailsPresenter
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_details.view.*
 import kotlinx.android.synthetic.main.content_details.view.*
 import kotlinx.android.synthetic.main.content_details.view.from
 import kotlinx.android.synthetic.main.content_details.view.from_shimmer
@@ -62,23 +65,17 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
         binding = DataBindingUtil.setContentView(this, R.layout.activity_details)
 
         setupToolbar()
-        startShimmerAnimations()
-        Thread.sleep(2)
-        stopShimmerAnimations()
-        hideShimmerPlaceholders()
 
-        setDetails(getStart()!!, getEnd()!!, getGoodsPicture()!!, getPrice()!!)
-        //userDetailsPresenter.loadUserDetails(getUserName()!!, getId()!!)
-        //userDetailsPresenter.loadNotes(getId()!!)
-        /*binding.root.save_notes.setOnClickListener {
-            userDetailsPresenter.updateNotes(
-                binding.root.notes.text.toString(),
+        detailsPresenter.loadDelivery(getId()!!)
+        detailsPresenter.loadFavorite(getId()!!)
+        binding.root.save_favorite.setOnClickListener {
+            detailsPresenter.toggleFavorite(
                 getId()!!
             )
-        }*/
+        }
     }
 
-    private fun getId(): Int? = intent.getIntExtra(EXTRA_ID, -1)
+    private fun getId(): String? = intent.getStringExtra(EXTRA_ID)
     private fun getStart(): String? = intent.getStringExtra(EXTRA_START)
     private fun getEnd(): String? = intent.getStringExtra(EXTRA_END)
     private fun getGoodsPicture(): String? = intent.getStringExtra(EXTRA_GOODS_PICTURE)
@@ -95,17 +92,27 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
         return detailsPresenter
     }
 
-    private fun setDetails(from: String, to: String, goodsPicture: String, price: String) {
-        val builder = Picasso.Builder(this)
-        builder.downloader(OkHttp3Downloader(this))
-        builder.build().load(goodsPicture)
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
-            .into(binding.root.goods_to_deliver)
+    override fun setDetails(delivery: Delivery) {
+        delivery.let {
+            val builder = Picasso.Builder(this)
+            builder.downloader(OkHttp3Downloader(this))
+            builder.build().load(it.goodsPicture)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .into(binding.root.goods_to_deliver)
 
-        binding.root.from.text = from
-        binding.root.to.text = to
-        binding.root.delivery_fee.text = price
+            binding.root.from.text = it.route.start
+            binding.root.to.text = it.route.end
+
+            val deliveryFee: String = it.deliveryFee.replace("$", "")
+            val surcharge: String = it.deliveryFee.replace("$", "")
+
+            val price = String.format("$${surcharge.toFloat() + deliveryFee.toFloat()}")
+            binding.root.delivery_fee.text = price
+        }
+
+        stopShimmerAnimations()
+        hideShimmerPlaceholders()
     }
 
     override fun showMessage(message: String) {
@@ -113,6 +120,16 @@ class DetailsActivity : MvpActivity<DetailsView, DetailsPresenter>(),
             message,
             Snackbar.LENGTH_SHORT)
             .show()
+    }
+
+    override fun toggleFavoriteButton(isFavorite: Boolean) {
+        if (!isFavorite) {
+            binding.saveFavorite.text = resources.getString(R.string.add_to_favorites)
+            binding.saveFavorite.background = resources.getDrawable(R.color.colorAccent)
+        } else {
+            binding.saveFavorite.text = resources.getString(R.string.remove_to_favorites)
+            binding.saveFavorite.background = resources.getDrawable(R.color.light_gray)
+        }
     }
 
     override fun startShimmerAnimations() {

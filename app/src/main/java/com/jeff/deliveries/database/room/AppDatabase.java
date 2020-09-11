@@ -5,14 +5,17 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.jeff.deliveries.database.local.Delivery;
+import com.jeff.deliveries.database.local.Favorite;
 import com.jeff.deliveries.database.room.converter.DeliveryConverter;
 import com.jeff.deliveries.database.room.dao.DeliveryDao;
+import com.jeff.deliveries.database.room.dao.FavoritesDao;
 
 @Database(
         entities = {
-                Delivery.class
+                Delivery.class,
+                Favorite.class,
         },
-        version = 5,
+        version = 10,
         exportSchema = false
 )
 
@@ -22,4 +25,5 @@ import com.jeff.deliveries.database.room.dao.DeliveryDao;
         })
 public abstract class AppDatabase extends RoomDatabase {
         public abstract DeliveryDao deliveryDao();
+        public abstract FavoritesDao favoritesDao();
 }

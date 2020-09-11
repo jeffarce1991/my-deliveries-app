@@ -2,7 +2,7 @@ package com.jeff.deliveries.supplychain.deliveries
 
 import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.database.usecase.local.loader.DeliveryLocalLoader
-import com.jeff.deliveries.database.usecase.local.saver.PhotoLocalSaver
+import com.jeff.deliveries.database.usecase.local.saver.DeliveryLocalSaver
 import com.jeff.deliveries.main.mapper.DeliveryDtoToDeliveryMapper
 import com.jeff.deliveries.webservices.internet.RxInternet
 import com.jeff.deliveries.webservices.usecase.loader.DeliveriesRemoteLoader
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class DefaultDeliveriesLoader @Inject
 constructor(private val remoteLoader: DeliveriesRemoteLoader,
             private val localLoader: DeliveryLocalLoader,
-            private val localSaver: PhotoLocalSaver,
+            private val localSaver: DeliveryLocalSaver,
             private val rxInternet: RxInternet): DeliveriesLoader{
 
     override fun loadInitial(): Single<List<Delivery>> {

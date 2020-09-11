@@ -13,13 +13,19 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.jeff.deliveries.R
 import com.jeff.deliveries.adapter.DeliveriesAdapter.CustomViewHolder
+import com.jeff.deliveries.android.base.extension.hide
+import com.jeff.deliveries.android.base.extension.show
 import com.jeff.deliveries.database.local.Delivery
+import com.jeff.deliveries.database.local.Favorite
 import com.jeff.deliveries.databinding.ItemDeliveryBinding
 import com.jeff.deliveries.main.detail.view.DetailsActivity
+import java.util.*
+import kotlin.Comparator
 
 internal class DeliveriesAdapter(
     private val context: Context,
-    private val dataList: MutableList<Delivery>
+    private val dataList: MutableList<Delivery>,
+    private val favoriteList: List<Favorite>
 ) : RecyclerView.Adapter<CustomViewHolder>() {
 
     internal class CustomViewHolder(binding: ItemDeliveryBinding) :
@@ -43,6 +49,7 @@ internal class DeliveriesAdapter(
             p0,
             false
         )
+        sort()
         return CustomViewHolder(binding)
     }
 
@@ -54,11 +61,16 @@ internal class DeliveriesAdapter(
         val deliveryFee: String = item.deliveryFee.replace("$", "")
         val surcharge: String = item.deliveryFee.replace("$", "")
 
-        /*if (favoriteList[position].id == item.id) {
-            holder.favorite.show()
-        } else {
-            holder.favorite.hide()
-        }*/
+        for (f in favoriteList) {
+            if (f.id == item.id) {
+                if (f.isFavorite) {
+                    holder.favorite.show()
+                } else {
+                    holder.favorite.hide()
+                }
+            }
+        }
+
         val price = String.format("$${surcharge.toFloat() + deliveryFee.toFloat()}")
         holder.price.text = price
 
@@ -83,10 +95,30 @@ internal class DeliveriesAdapter(
         }
     }
 
+    private fun getPrice(s1: String, s2: String): Float {
+        val deliveryFee = s1.replace("$", "")
+        val surcharge = s2.replace("$", "")
+
+        return surcharge.toFloat() + deliveryFee.toFloat()
+    }
+
+    private fun sort() {
+        Collections.sort(dataList, Comparator<Delivery> { obj1, obj2 ->
+            // ## Ascending order
+
+            getPrice(obj2.deliveryFee, obj2.surcharge)
+                .compareTo(getPrice(obj1.deliveryFee, obj1.surcharge)) // To compare string values
+            // return Integer.valueOf(obj1.empId).compareTo(Integer.valueOf(obj2.empId)); // To compare integer values
+
+            // ## Descending order
+            // return obj2.firstName.compareToIgnoreCase(obj1.firstName); // To compare string values
+            // return Integer.valueOf(obj2.empId).compareTo(Integer.valueOf(obj1.empId)); // To compare integer values
+        })
+    }
+
     fun addAll(users: MutableList<Delivery>) {
         dataList.addAll(users)
         notifyDataSetChanged()
-        notifyItemRangeInserted(dataList.lastIndex, users.size)
     }
 
     override fun getItemCount(): Int {

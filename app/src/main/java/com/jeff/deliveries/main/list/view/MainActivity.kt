@@ -15,6 +15,7 @@ import com.jeff.deliveries.R
 import com.jeff.deliveries.adapter.DeliveriesAdapter
 import com.jeff.deliveries.android.base.extension.invokeSimpleDialog
 import com.jeff.deliveries.database.local.Delivery
+import com.jeff.deliveries.database.local.Favorite
 import com.jeff.deliveries.databinding.ActivityMainBinding
 import com.jeff.deliveries.main.list.presenter.MainPresenter
 import dagger.android.AndroidInjection
@@ -52,6 +53,7 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(),
             mainPresenter.loadInitialDeliveries()
         }
         initScrollListener()
+        mainPresenter.observeFavorites(this)
     }
 
     private fun setUpToolbarTitle() {
@@ -113,7 +115,15 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(),
 
     //Method to generate List of data using RecyclerView with custom com.project.retrofit.adapter*//*
     override fun generateDeliveryList(deliveries: List<Delivery>) {
-        adapter = DeliveriesAdapter(this, deliveries as MutableList<Delivery>)
+        adapter = DeliveriesAdapter(this, deliveries as MutableList<Delivery>, emptyList())
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this@MainActivity)
+        binding.root.customRecyclerView.layoutManager = layoutManager
+        binding.root.customRecyclerView.adapter = adapter
+    }
+
+    //Method to generate List of data using RecyclerView with custom com.project.retrofit.adapter*//*
+    override fun generateDeliveryList(deliveries: List<Delivery>, favoriteList: List<Favorite>) {
+        adapter = DeliveriesAdapter(this, deliveries as MutableList<Delivery>, favoriteList)
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this@MainActivity)
         binding.root.customRecyclerView.layoutManager = layoutManager
         binding.root.customRecyclerView.adapter = adapter

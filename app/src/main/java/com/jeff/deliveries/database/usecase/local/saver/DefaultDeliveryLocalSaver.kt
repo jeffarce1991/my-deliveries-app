@@ -7,11 +7,15 @@ import io.reactivex.Observable
 import timber.log.Timber
 import javax.inject.Inject
 
-class DefaultPhotoLocalSaver @Inject
-constructor(private val dao: DeliveryDao) : PhotoLocalSaver {
+class DefaultDeliveryLocalSaver @Inject
+constructor(private val dao: DeliveryDao) : DeliveryLocalSaver {
 
     override fun save(delivery: Delivery): Completable {
         return Completable.fromAction { dao.insert(delivery)}
+    }
+
+    override fun update(delivery: Delivery): Completable {
+        return Completable.fromAction { dao.update(delivery)}
     }
 
     override fun saveAll(deliveries: List<Delivery>): Observable<List<Delivery>> {
