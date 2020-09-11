@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_margin="@dimen/screen_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:id="@+id/from_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/screen_margin"
+            android:text="From : "
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail"
+            app:layout_constraintTop_toTopOf="@id/from"
+            app:layout_constraintBottom_toBottomOf="@id/from"
+            />
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/from_label"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/from_list_shimmer"
+            android:layout_width="100dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="@dimen/screen_margin"
+            android:background="@color/shimmer_background"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/from_label"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:id="@+id/to_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/screen_margin"
+            android:text="To : "
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail"
+            app:layout_constraintTop_toTopOf="@id/to"
+            app:layout_constraintBottom_toBottomOf="@id/to"
+            />
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/from_label"
+            app:layout_constraintTop_toBottomOf="@id/from"/>
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/to_list_shimmer"
+            android:layout_width="100dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="@dimen/screen_margin"
+            android:background="@color/shimmer_background"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/from_label"
+            app:layout_constraintTop_toBottomOf="@id/from" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_favorite_border_24"
+            android:drawableLeft="@drawable/ic_baseline_favorite_border_24"
+            android:layout_marginEnd="@dimen/screen_margin_large"
+            android:layout_marginRight="@dimen/screen_margin_large"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/screen_margin"
+            android:text="$85 "
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/price_list_shimmer"
+            android:layout_width="40dp"
+            android:layout_height="22dp"
+            android:layout_margin="@dimen/screen_margin"
+            android:background="@color/shimmer_background"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

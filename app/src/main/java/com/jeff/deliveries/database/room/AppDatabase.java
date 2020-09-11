@@ -4,22 +4,26 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.jeff.deliveries.database.local.Photo;
-import com.jeff.deliveries.database.room.converter.PhotoConverter;
-import com.jeff.deliveries.database.room.dao.PhotoDao;
+import com.jeff.deliveries.database.local.Delivery;
+import com.jeff.deliveries.database.local.Favorite;
+import com.jeff.deliveries.database.room.converter.DeliveryConverter;
+import com.jeff.deliveries.database.room.dao.DeliveryDao;
+import com.jeff.deliveries.database.room.dao.FavoritesDao;
 
 @Database(
         entities = {
-                Photo.class
+                Delivery.class,
+                Favorite.class,
         },
-        version = 3,
+        version = 10,
         exportSchema = false
 )
 
 @TypeConverters(
         {
-                PhotoConverter.class
+                DeliveryConverter.class
         })
 public abstract class AppDatabase extends RoomDatabase {
-        public abstract PhotoDao photoDao();
+        public abstract DeliveryDao deliveryDao();
+        public abstract FavoritesDao favoritesDao();
 }
