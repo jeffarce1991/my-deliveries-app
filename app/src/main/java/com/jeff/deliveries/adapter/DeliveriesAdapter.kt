@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -19,6 +20,7 @@ import com.jeff.deliveries.database.local.Delivery
 import com.jeff.deliveries.database.local.Favorite
 import com.jeff.deliveries.databinding.ItemDeliveryBinding
 import com.jeff.deliveries.main.detail.view.DetailsActivity
+import timber.log.Timber
 import java.util.*
 import kotlin.Comparator
 
@@ -61,15 +63,12 @@ internal class DeliveriesAdapter(
         val deliveryFee: String = item.deliveryFee.replace("$", "")
         val surcharge: String = item.deliveryFee.replace("$", "")
 
-        for (f in favoriteList) {
+        /*for (f in favoriteList) {
             if (f.id == item.id) {
-                if (f.isFavorite) {
-                    holder.favorite.show()
-                } else {
-                    holder.favorite.hide()
-                }
+                Timber.d("==q favoriteList ${f.id} == ${item.id}")
+                holder.favorite.isVisible(f.isFavorite)
             }
-        }
+        }*/
 
         val price = String.format("$${surcharge.toFloat() + deliveryFee.toFloat()}")
         holder.price.text = price
